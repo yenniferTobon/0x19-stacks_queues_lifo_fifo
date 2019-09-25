@@ -4,12 +4,26 @@
 #include <stdlib.h>
 #include <string.h>
 #include "monty.h"
+
 /**
- * _Main - function that
- * @argc: nothing
- * @argv: char name
- * Return: int 0 is success exit
- */
+*
+*
+*
+*/
+/**void _pall(stack_t **top, unsigned int line_number)
+{
+	stack_t *current = *top;
+	(void)line_number;
+
+	if (*top == NULL)
+		return;
+
+	while (current)
+	{
+		printf("%d\n", current->n);
+		current = current->next;
+	}
+}
 
 void _push(stack_t **top, unsigned int line_number)
 {
@@ -19,29 +33,33 @@ void _push(stack_t **top, unsigned int line_number)
 	neW = malloc(sizeof(stack_t));
 	if (neW == NULL)
 	{
-		/**organizar este error**/
+		##organizar este error
 		return ;
 	}
+	neW->n = 0;
+	neW->prev = NULL;
+
 	if (*top == NULL)
 	{
+		neW->next = NULL;
 		*top = neW;
 	}
 	else
 	{
 		neW->next = *top;
+		(*top)->prev = neW;
 		*top = neW;
 	}
-	neW->next = NULL;
-	neW->prev = NULL;
-	neW->n = 0;
-}
+}**/
+
+
 int fun_operators(char *operation, stack_t **top, int Nlinea)
 {
 	int i = 0;
 
 	instruction_t f_ope[] = {
 			{"push", _push},
-			{"pall", _push},
+			{"pall", _pall},
 			{NULL, NULL},
 	};
 
@@ -51,13 +69,19 @@ int fun_operators(char *operation, stack_t **top, int Nlinea)
 		{
 			f_ope[i].f(top, Nlinea);
 			return (1);
-			printf("lo encontre");
 		}
 		i++;
 	}
 	/**Falta si no encuentra la operacion se debe mostrar un error **/
 	return (0);
 }
+
+/**
+ * _Main - function that
+ * @argc: nothing
+ * @argv: char name
+ * Return: int 0 is success exit
+ */
 
 int main(int argc, char *argv[])
 {
@@ -71,7 +95,7 @@ int main(int argc, char *argv[])
 	(void)argv;
 	if (argc > 2 || argc == 1)
 	{
-		printf("Organizar este error");
+		printf("Organizar este error\n");
 		/*return EXIT_FAILURE;*/
 	}
 
@@ -79,10 +103,8 @@ int main(int argc, char *argv[])
 	while (getline(&line_buf, &sizeBuffer, filedesc) != EOF)
 	{
 		operation = strtok(line_buf, " \r\n\t");
-		printf("%s\n", operation);
 		fun_operators(operation, &top, Nlinea);
 		operation2 = strtok(NULL, " \r\n\t");
-		printf("%s", operation2);
 		if ((strcmp(operation, "push") == 0) && operation2 != NULL)
 		{
 			top->n = atoi(operation2);

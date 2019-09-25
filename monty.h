@@ -26,3 +26,14 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+struct node
+{
+    char *data;
+    struct node *next;
+};
+int fun_operators(char *operation, stack_t **top, int Nlinea);
+void (*f)(stack_t **stack, unsigned int line_number);
+void _push(stack_t **top, unsigned int line_number);
+void _pall(stack_t **stack, unsigned int line_number);
+
