@@ -1,7 +1,9 @@
 #include "monty.h"
 /**
-*
-*
+* _swap - swaps the top two elements of the stack.
+* @stack: Linked list
+* @line_number: Int value
+* Return: Void
 */
 void _swap(stack_t **stack, unsigned int line_number)
 {
@@ -10,7 +12,7 @@ void _swap(stack_t **stack, unsigned int line_number)
 
     if (!(*stack) || !(*stack)->next)
     {
-        printf("error");
+        printf("L%d: can't swap, stack too short", line_number);
         exit(EXIT_FAILURE);
     }
 
